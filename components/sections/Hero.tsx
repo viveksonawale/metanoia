@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Check } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
     const images = [
@@ -27,9 +28,9 @@ export function Hero() {
             <Container className="relative z-10 grid lg:grid-cols-2 gap-12 items-center max-w-[1400px] px-4 sm:px-4 lg:px-4">
                 {/* Text Content */}
                 <motion.div
-                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="md:-mt-24"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-[#44d62c]/30 text-[#44d62c] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-[22px] bg-[#44d62c]/5">
                         <span className="relative flex h-2 w-2">
@@ -50,12 +51,16 @@ export function Hero() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                        <Button size="lg" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 relative overflow-hidden after:content-[''] after:absolute after:top-0 after:left-[-100%] after:w-full after:h-full after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent after:animate-shine">
-                            Shop Now <ArrowRight className="ml-2 h-5 w-5" />
-                        </Button>
-                        <Button variant="secondary" size="lg" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14">
-                            View Features
-                        </Button>
+                        <Link href="/catalog" className="w-full sm:w-auto">
+                            <Button size="lg" className="w-full text-base md:text-lg h-12 md:h-14 relative overflow-hidden after:content-[''] after:absolute after:top-0 after:left-[-100%] after:w-full after:h-full after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent after:animate-shine">
+                                EXPLORE PRODUCTS <ArrowRight className="ml-2 h-5 w-5" />
+                            </Button>
+                        </Link>
+                        <Link href="/contact-sales" className="w-full sm:w-auto">
+                            <Button variant="secondary" size="lg" className="w-full text-base md:text-lg h-12 md:h-14">
+                                Contact Sales
+                            </Button>
+                        </Link>
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 text-lg text-muted-foreground font-medium">
@@ -73,10 +78,9 @@ export function Hero() {
 
                 {/* Hero Marquee */}
                 <motion.div
-                    initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="relative h-[550px] md:h-[700px] max-h-[80vh] w-full overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] -mt-10"
+                    className="relative h-[600px] md:h-[850px] max-h-[90vh] w-full overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] mt-12 md:-mt-20"
                 >
                     <div className="grid grid-cols-2 gap-4 h-full">
                         {/* Column 1 - Up */}

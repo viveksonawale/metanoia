@@ -12,54 +12,58 @@ const megaMenuData = {
     Products: {
         categories: [
             {
-                title: "Doors & Door Systems",
+                title: "Fire Rated Doors",
                 subcategories: [
                     "Fire-Rated Steel Doors",
-                    "Metal Doors",
-                    "Emergency Exit Doors",
-                    "Acoustic Doors",
-                    "Security / Bullet-Resistant Doors",
-                    "Door Frames & Accessories",
-                    "Hinges, Locks & Hardware",
+                    "Acoustic Door Sets",
+                    "Security Doors",
+                    "Sliding Door Systems",
+                    "Industrial Doors",
+                    "Door Hardware",
                 ],
             },
             {
-                title: "Windows & Glazing Systems",
+                title: "Windows and Glazing Systems",
                 subcategories: [
-                    "uPVC Window Systems",
-                    "Aluminium Window Systems",
-                    "Sliding Windows",
-                    "Casement Windows",
-                    "Fixed / Picture Windows",
-                    "Glass & Glazing Solutions",
+                    "uPVC Windows",
+                    "Aluminium Windows",
+                    "Structural Glazing",
+                    "Curtain Walls",
+                    "Glass Partitions",
+                    "Skylights",
                 ],
             },
             {
                 title: "Façade & Architectural Systems",
                 subcategories: [
-                    "Curtain Wall Systems",
-                    "Structural Glazing",
-                    "Louvers & Sunshades",
+                    "Unitized Façades",
+                    "Stick Curtain Walls",
                     "Cladding Systems",
-                    "Railing & Balustrades",
+                    "Louvers & Sunshades",
+                    "Balustrades",
+                    "Canopies",
                 ],
             },
             {
                 title: "Kitchen & Interior Solutions",
                 subcategories: [
-                    "Modular Kitchen Systems",
-                    "Stainless Steel Kitchen Units",
-                    "Storage & Shelving Systems",
-                    "Custom Fabricated Components",
+                    "Commercial Kitchens",
+                    "Stainless Steel Cabinetry",
+                    "Modular Workstations",
+                    "Hygienic Storage",
+                    "Food Processing Units",
+                    "Custom Sinks",
                 ],
             },
             {
                 title: "Industrial & Custom Fabrication",
                 subcategories: [
-                    "Custom Metal Fabrication",
-                    "OEM / Project-Based Manufacturing",
-                    "Industrial Enclosures",
-                    "Special-Purpose Components",
+                    "Heavy Fabrication",
+                    "OEM Manufacturing",
+                    "Sheet Metal Enclosures",
+                    "Structural Steel",
+                    "Precision Parts",
+                    "Automated Welding",
                 ],
             },
         ],
@@ -328,6 +332,41 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Handle click outside and ESC key
+    React.useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+
+            // Close search if clicking outside search elements
+            if (isSearchOpen && !target.closest('.search-container')) {
+                setIsSearchOpen(false);
+            }
+
+            // Close cart if clicking outside cart elements
+            if (isCartOpen && !target.closest('.cart-container')) {
+                setIsCartOpen(false);
+            }
+        };
+
+        const handleEsc = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setIsSearchOpen(false);
+                setIsCartOpen(false);
+                setIsOpen(false);
+            }
+        };
+
+        if (isSearchOpen || isCartOpen || isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+            document.addEventListener("keydown", handleEsc);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEsc);
+        };
+    }, [isSearchOpen, isCartOpen, isOpen]);
+
     const handleMouseEnter = (label: string) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         if (megaMenuData[label as keyof typeof megaMenuData]) {
@@ -411,34 +450,42 @@ export function Navbar() {
 
                 {/* Right Icons - Desktop */}
                 <div className="hidden md:flex items-center gap-6 text-[#999]">
-                    <button
-                        className="hover:text-white transition-colors"
-                        onClick={() => setIsSearchOpen(!isSearchOpen)}
-                    >
-                        <Search className="w-5 h-5" />
-                    </button>
-                    <button
-                        className="hover:text-white transition-colors relative"
-                        onClick={() => setIsCartOpen(!isCartOpen)}
-                    >
-                        <ShoppingCart className="w-5 h-5" />
-                    </button>
+                    <div className="search-container flex items-center">
+                        <button
+                            className="hover:text-white transition-colors"
+                            onClick={() => setIsSearchOpen(!isSearchOpen)}
+                        >
+                            <Search className="w-5 h-5" />
+                        </button>
+                    </div>
+                    <div className="cart-container flex items-center">
+                        <button
+                            className="hover:text-white transition-colors relative"
+                            onClick={() => setIsCartOpen(!isCartOpen)}
+                        >
+                            <ShoppingCart className="w-5 h-5" />
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile Icons - Right (Search & Cart) */}
                 <div className="md:hidden flex items-center gap-4 text-[#999]">
-                    <button
-                        className="hover:text-white transition-colors"
-                        onClick={() => setIsSearchOpen(!isSearchOpen)}
-                    >
-                        <Search className="w-5 h-5" />
-                    </button>
-                    <button
-                        className="hover:text-white transition-colors relative"
-                        onClick={() => setIsCartOpen(!isCartOpen)}
-                    >
-                        <ShoppingCart className="w-5 h-5" />
-                    </button>
+                    <div className="search-container flex items-center">
+                        <button
+                            className="hover:text-white transition-colors"
+                            onClick={() => setIsSearchOpen(!isSearchOpen)}
+                        >
+                            <Search className="w-5 h-5" />
+                        </button>
+                    </div>
+                    <div className="cart-container flex items-center">
+                        <button
+                            className="hover:text-white transition-colors relative"
+                            onClick={() => setIsCartOpen(!isCartOpen)}
+                        >
+                            <ShoppingCart className="w-5 h-5" />
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -451,7 +498,7 @@ export function Navbar() {
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="border-t border-[#222] overflow-hidden"
+                            className="border-t border-[#222] overflow-hidden search-container"
                         >
                             <div className="max-w-[1400px] mx-auto px-4 py-4">
                                 <div className="relative">
@@ -477,7 +524,7 @@ export function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-4 top-[70px] w-80 bg-[#1a1a1a] border border-[#333] rounded-lg shadow-2xl z-50"
+                        className="absolute right-4 top-[70px] w-80 bg-[#1a1a1a] border border-[#333] rounded-lg shadow-2xl z-50 cart-container"
                     >
                         {/* Empty Cart Message */}
                         <div className="p-6 border-b border-[#333]">
@@ -634,7 +681,7 @@ export function Navbar() {
                                                     (item, idx) => (
                                                         <Link
                                                             key={idx}
-                                                            href="#"
+                                                            href={item === "Product Catalog" ? "/catalog" : "#"}
                                                             className="block text-base text-[#999] hover:text-[#44d62c] transition-colors py-1"
                                                         >
                                                             {item}

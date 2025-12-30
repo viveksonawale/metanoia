@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Titillium_Web } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const titillium = Titillium_Web({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen font-sans antialiased", titillium.variable)}>
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );
