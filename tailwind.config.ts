@@ -33,12 +33,21 @@ export default {
                 ring: "var(--ring)",
             },
             fontFamily: {
-                sans: ["var(--font-inter)", "sans-serif"],
+                sans: ["var(--font-titillium)", "sans-serif"],
             },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+            },
+            keyframes: {
+                shine: {
+                    "0%": { left: "-100%" },
+                    "100%": { left: "100%" },
+                },
+            },
+            animation: {
+                shine: "shine 3s infinite",
             },
         },
     },

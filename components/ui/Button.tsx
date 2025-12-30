@@ -14,17 +14,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = "primary", size = "default", isLoading, children, ...props }, ref) => {
 
         const variants = {
-            primary: "bg-primary text-primary-foreground hover:brightness-110 border border-transparent font-medium",
-            secondary: "bg-transparent border border-primary text-primary hover:bg-primary/10",
-            outline: "border border-border bg-transparent hover:border-primary hover:text-primary",
-            ghost: "hover:bg-muted hover:text-foreground",
-            link: "text-primary underline-offset-4 hover:underline hover:brightness-110",
+            primary: "bg-primary text-black hover:brightness-110 border border-transparent font-bold tracking-widest uppercase",
+            secondary: "bg-transparent border border-primary text-primary hover:bg-primary/10 font-bold tracking-widest uppercase",
+            outline: "border border-border bg-transparent hover:border-primary hover:text-primary font-bold tracking-widest uppercase",
+            ghost: "hover:bg-muted hover:text-foreground font-bold tracking-widest uppercase",
+            link: "text-primary underline-offset-4 hover:underline hover:brightness-110 uppercase tracking-widest",
         };
 
         const sizes = {
-            default: "h-11 px-6 py-2",
-            sm: "h-9 rounded-md px-3",
-            lg: "h-14 rounded-md px-10 text-lg",
+            default: "h-11 px-8 py-2",
+            sm: "h-9 px-4 text-xs",
+            lg: "h-14 px-10 text-lg",
             icon: "h-10 w-10",
         };
 
@@ -32,7 +32,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <button
                 ref={ref}
                 className={cn(
-                    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+                    "inline-flex items-center justify-center whitespace-nowrap text-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
                     variants[variant],
                     sizes[size],
                     className
