@@ -3,18 +3,17 @@
 
 import React from "react";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { categoryData } from "@/lib/categoryData";
 import { ProductSpecifications } from "@/components/ProductSpecifications";
-import { ArrowRight, ChevronRight, Download, FileText, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ChevronRight, FileText, CheckCircle2 } from "lucide-react";
 
 interface PageProps {
-    params: {
+    params: Promise<{
         category: string;
-    }
+    }>;
 }
 
 // Next.js 15 expects params to be a Promise in some configurations, but usually just props for dynamic routes in app dir.

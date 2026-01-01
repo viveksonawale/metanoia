@@ -31,8 +31,8 @@ export function Testimonials() {
             <Container className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-16">
                     <div className="text-muted-foreground text-xs font-bold tracking-widest uppercase mb-2">Trusted By Industry Leaders</div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                        Client <span className="text-accent italic font-serif">Perspectives</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground uppercase tracking-tight">
+                        Client <span className="text-accent font-serif italic normal-case">Perspectives</span>
                     </h2>
                 </div>
 
@@ -50,7 +50,7 @@ export function Testimonials() {
                             <Quote className="w-10 h-10 text-accent/20 mb-6 group-hover:text-accent transition-colors duration-500" />
 
                             <p className="text-foreground/80 leading-relaxed mb-8 italic text-lg decoration-border/30">
-                                "{item.quote}"
+                                &ldquo;{item.quote}&rdquo;
                             </p>
 
                             <div className="flex flex-col border-t border-border/40 pt-6">

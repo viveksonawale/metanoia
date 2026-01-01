@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 @layer base {
+
+  /* Forced rebuild trigger */
   :root {
     /* Industrial B2B Theme */
     --background: #FFFFFF;

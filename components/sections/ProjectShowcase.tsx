@@ -20,7 +20,7 @@ export function ProjectShowcase() {
             <Container className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12">
                     <div className="text-muted-foreground text-xs font-bold tracking-widest uppercase mb-2">Project Gallery</div>
-                    <h2 className="text-4xl font-bold text-foreground uppercase tracking-tight">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground uppercase tracking-tight whitespace-nowrap">
                         Featured <span className="text-accent font-serif italic normal-case">Applications</span>
                     </h2>
                 </div>

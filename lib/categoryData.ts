@@ -10,22 +10,22 @@ import {
     Building2,
     LayoutGrid,
     Factory,
-    CheckCircle2,
-    MoveUpRight,
     VolumeX,
-    Wrench
+    CheckCircle2,
+    MoveUpRight
 } from "lucide-react";
+
+import { type LucideIcon } from "lucide-react";
 
 export interface Feature {
     title: string;
     description: string;
-    icon: any;
+    icon: LucideIcon;
 }
 
 export interface Specification {
     label: string;
     value: string;
-    details?: string[];
 }
 
 export interface GalleryImage {
@@ -52,7 +52,7 @@ export interface Category {
     title: string;
     shortDescription: string;
     fullDescription: string;
-    icon: any;
+    icon: LucideIcon;
     image: string; // New field for card background
     heroImage: string;
     features: Feature[];

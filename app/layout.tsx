@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,10 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen font-sans antialiased", inter.variable)}>
-        <SmoothScroll>
-          {children}
-          <ScrollToTop />
-        </SmoothScroll>
+        {children}
+        <ScrollToTop />
       </body>
     </html>
   );

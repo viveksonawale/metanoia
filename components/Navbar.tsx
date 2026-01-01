@@ -431,15 +431,15 @@ export function Navbar() {
 
                     {/* Logo - Centered on mobile, left on desktop */}
                     <Link href="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center shrink-0 md:mr-auto">
-                        <div className="relative w-10 h-10">
-                            <Image
-                                src="/images/logo.jpg"
-                                alt="Metanoia"
-                                fill
-                                className="object-contain transition-all duration-300"
-                                priority
-                            />
-                        </div>
+                        <Image
+                            src="/images/logo.jpg"
+                            alt="Metanoia"
+                            width={40}
+                            height={40}
+                            className="object-contain transition-all duration-300 w-10 h-10"
+                            style={{ maxWidth: '40px', maxHeight: '40px', width: '40px', height: '40px' }}
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Links - Centered */}
