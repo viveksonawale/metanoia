@@ -9,6 +9,13 @@ export default {
     darkMode: "class",
     theme: {
         extend: {
+            screens: {
+                'xs': '481px',
+                'sm': '641px',
+                'md': '1025px',
+                'lg': '1441px',
+                'xl': '1920px',
+            },
             colors: {
                 background: "var(--background)",
                 foreground: "var(--foreground)",
@@ -28,26 +35,25 @@ export default {
                     DEFAULT: "var(--muted)",
                     foreground: "var(--muted-foreground)",
                 },
+                popover: {
+                    DEFAULT: "var(--popover)",
+                    foreground: "var(--popover-foreground)",
+                },
+                card: {
+                    DEFAULT: "var(--card)",
+                    foreground: "var(--card-foreground)",
+                },
                 border: "var(--border)",
                 input: "var(--input)",
                 ring: "var(--ring)",
             },
             fontFamily: {
-                sans: ["var(--font-titillium)", "sans-serif"],
+                sans: ["var(--font-inter)", "sans-serif"],
             },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
-            },
-            keyframes: {
-                shine: {
-                    "0%": { left: "-100%" },
-                    "100%": { left: "100%" },
-                },
-            },
-            animation: {
-                shine: "shine 3s infinite",
             },
         },
     },

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { categoryData } from "@/lib/categoryData";
 
+import Image from "next/image";
+
 interface CategoryCardProps {
     title: string;
     description: string;
@@ -16,37 +18,41 @@ interface CategoryCardProps {
 
 export const CategoryCard = ({ title, description, slug, href, delay = 0 }: CategoryCardProps) => {
     const category = categoryData.find(c => c.slug === slug);
-    const Icon = category?.icon;
+    const imageSrc = category?.image;
 
-    if (!Icon) return null;
+    if (!imageSrc) return null;
+
     return (
         <Link
             href={href}
-            className="group relative flex flex-col h-full bg-[#0a0a0a] border border-[#222] rounded-lg p-8 overflow-hidden transition-all duration-300 hover:border-[#44d62c] hover:shadow-[0_0_20px_rgba(68,214,44,0.15)]"
+            className="group relative flex flex-col h-[300px] sm:h-[400px] w-full overflow-hidden rounded-sm shadow-md transition-all duration-300 hover:shadow-xl"
             style={{ animationDelay: `${delay}ms` }}
         >
-            {/* Background Icon Watermark */}
-            <div className="absolute top-4 right-4 text-[#111] transition-transform duration-500 group-hover:scale-110 group-hover:text-[#161616] pointer-events-none">
-                <Icon strokeWidth={1} className="w-32 h-32 opacity-50" />
-            </div>
-
-            {/* Icon */}
-            <div className="relative mb-6">
-                <div className="w-12 h-12 flex items-center justify-center rounded border border-[#333] bg-[#111] text-[#44d62c] transition-colors duration-300 group-hover:border-[#44d62c] group-hover:bg-[#44d62c]/10">
-                    <Icon className="w-6 h-6" />
-                </div>
+            {/* Background Image with Zoom Effect */}
+            <div className="absolute inset-0 h-full w-full">
+                <Image
+                    src={imageSrc}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                {/* Dark Gradient Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
             </div>
 
             {/* Content */}
-            <div className="relative z-10 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-3">{title}</h3>
-                <p className="text-[#999] text-sm leading-relaxed mb-8 flex-1">
+            <div className="relative z-10 flex h-full flex-col justify-end p-8 text-white">
+                <h3 className="mb-2 text-2xl font-bold leading-tight tracking-tight text-white transition-transform duration-300 group-hover:-translate-y-1">
+                    {title}
+                </h3>
+                <p className="mb-6 line-clamp-2 text-sm text-gray-200 opacity-90 transition-transform duration-300 group-hover:-translate-y-1">
                     {description}
                 </p>
 
-                {/* CTA */}
-                <div className="flex items-center text-[#446644] text-xs font-bold tracking-widest uppercase transition-colors duration-300 group-hover:text-[#44d62c]">
-                    Explore <ArrowRight className="w-3.5 h-3.5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                {/* Animated Explore Button */}
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/90 opacity-0 transition-all duration-500 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 text-accent-foreground">
+                    Explore <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
             </div>
         </Link>

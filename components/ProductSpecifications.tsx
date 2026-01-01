@@ -28,28 +28,28 @@ export const ProductSpecifications = ({ specifications }: ProductSpecificationsP
     };
 
     return (
-        <div className="bg-[#0a0a0a] border border-[#222] rounded-lg overflow-hidden">
-            <div className="p-6 border-b border-[#222] flex items-center justify-between">
-                <h3 className="text-xl font-bold text-white uppercase tracking-wide">Technical Specifications</h3>
-                <button className="flex items-center gap-2 text-xs font-bold text-[#44d62c] hover:text-white transition-colors uppercase tracking-wider">
+        <div className="bg-background border border-border rounded-sm overflow-hidden shadow-sm">
+            <div className="p-6 border-b border-border flex items-center justify-between bg-secondary/30">
+                <h3 className="text-xl font-bold text-foreground uppercase tracking-wide">Technical Specifications</h3>
+                <button className="flex items-center gap-2 text-xs font-bold text-accent hover:text-accent/80 transition-colors uppercase tracking-wider">
                     <Download className="w-4 h-4" />
                     Download Spec Sheet
                 </button>
             </div>
 
-            <div className="divide-y divide-[#222]">
+            <div className="divide-y divide-border">
                 {specifications.map((section, idx) => (
-                    <div key={idx} className="bg-[#0a0a0a]">
+                    <div key={idx} className="bg-background">
                         <button
                             onClick={() => toggleCategory(section.category)}
-                            className="w-full flex items-center justify-between p-4 px-6 bg-[#111] hover:bg-[#161616] transition-colors text-left"
+                            className="w-full flex items-center justify-between p-4 px-6 bg-secondary/50 hover:bg-secondary transition-colors text-left"
                         >
-                            <span className="font-semibold text-white text-sm uppercase tracking-wider">
+                            <span className="font-semibold text-foreground text-sm uppercase tracking-wider">
                                 {section.category}
                             </span>
                             <ChevronDown
                                 className={cn(
-                                    "w-4 h-4 text-[#666] transition-transform duration-300",
+                                    "w-4 h-4 text-muted-foreground transition-transform duration-300",
                                     openCategories.includes(section.category) && "rotate-180"
                                 )}
                             />
@@ -63,16 +63,16 @@ export const ProductSpecifications = ({ specifications }: ProductSpecificationsP
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
-                                    <div className="divide-y divide-[#222]">
+                                    <div className="divide-y divide-border/50">
                                         {section.items.map((item, itemIdx) => (
                                             <div
                                                 key={itemIdx}
-                                                className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 py-4 hover:bg-[#111]/50 transition-colors"
+                                                className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 py-4 hover:bg-secondary/20 transition-colors"
                                             >
-                                                <div className="text-[#999] text-sm font-medium">
+                                                <div className="text-muted-foreground text-sm font-medium">
                                                     {item.label}
                                                 </div>
-                                                <div className="text-white text-sm">
+                                                <div className="text-foreground text-sm">
                                                     {item.value}
                                                 </div>
                                             </div>

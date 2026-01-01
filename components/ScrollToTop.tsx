@@ -35,24 +35,23 @@ export function ScrollToTop() {
         <AnimatePresence>
             {isVisible && (
                 <motion.button
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    whileHover={{ y: -4 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={scrollToTop}
                     className={cn(
                         "fixed bottom-8 right-8 z-50 p-3",
-                        "bg-zinc-900 border border-zinc-800",
-                        "rounded-full shadow-lg",
-                        "text-[#44d62c] hover:text-[#5aff3d]", // Razer green colors
-                        "hover:border-[#44d62c]/50 hover:shadow-[#44d62c]/20 hover:shadow-[0_0_15px_rgba(68,214,44,0.2)]",
-                        "transition-colors duration-300",
+                        "bg-accent shadow-xl shadow-accent/20 border border-accent/30",
+                        "rounded-sm",
+                        "text-white",
+                        "transition-all duration-300",
                         "group"
                     )}
                     aria-label="Scroll to top"
                 >
-                    <ChevronUp className="w-6 h-6 stroke-[3px]" />
+                    <ChevronUp className="w-5 h-5" />
                 </motion.button>
             )}
         </AnimatePresence>

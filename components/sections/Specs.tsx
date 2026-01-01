@@ -53,11 +53,11 @@ export function Specs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
-                        className="bg-card rounded-2xl border border-border overflow-hidden"
+                        className="bg-card rounded-2xl border border-border/50 shadow-sm overflow-hidden"
                     >
                         <div className="p-6 md:p-8">
                             <h3 className="text-xl font-bold mb-6 text-foreground">Data Sheet</h3>
-                            <dl className="divide-y divide-border">
+                            <dl className="divide-y divide-border/50">
                                 {specs.map((item, index) => (
                                     <div key={index} className="py-4 flex justify-between items-center hover:bg-muted/50 transition-colors duration-150 px-2 rounded-md">
                                         <dt className="text-muted-foreground font-medium">{item.label}</dt>

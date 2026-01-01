@@ -48,9 +48,9 @@ export function UseCases() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-                            className="p-8 rounded-3xl bg-muted/30 border border-border hover:border-primary/30 transition-colors duration-150 flex flex-col items-start gap-4 h-64 justify-end group cursor-default"
+                            className="p-8 rounded-3xl bg-muted/30 border border-border/50 hover:border-border hover:bg-muted/50 transition-all duration-300 flex flex-col items-start gap-4 h-64 justify-end group cursor-default"
                         >
-                            <div className="p-3 bg-background rounded-2xl shadow-sm text-muted-foreground">
+                            <div className="p-3 bg-background rounded-2xl shadow-sm text-foreground/80">
                                 <item.icon className="h-8 w-8" />
                             </div>
                             <div>

@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Titillium_Web } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
-const titillium = Titillium_Web({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
-  variable: "--font-titillium"
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
   title: "Metanoia Global",
   description: "Premium stainless steel cutting boards for the modern kitchen.",
+  appleWebApp: {
+    title: "Metanoia",
+  },
 };
 
 export default function RootLayout({
@@ -22,9 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen font-sans antialiased", titillium.variable)}>
-        {children}
-        <ScrollToTop />
+      <body className={cn("min-h-screen font-sans antialiased", inter.variable)}>
+        <SmoothScroll>
+          {children}
+          <ScrollToTop />
+        </SmoothScroll>
       </body>
     </html>
   );

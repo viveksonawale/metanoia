@@ -21,143 +21,81 @@ export function Hero() {
     const secondColumn = [...images, ...images];
 
     return (
-        <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-background">
-            {/* Subtle stone texture overlay */}
-            <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
+        <section className="relative pt-20 pb-20 md:pt-28 md:pb-32 overflow-hidden bg-background">
+            {/* Clean Light Gradient Overlay - Simplified for industrial look */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background/60 pointer-events-none" />
 
-            <Container className="relative z-10 grid lg:grid-cols-2 gap-12 items-center max-w-[1400px] px-4 sm:px-4 lg:px-4">
+            <Container className="relative z-10 grid md:grid-cols-2 gap-8 md:gap-12 items-center max-w-[1400px] px-4 sm:px-6 lg:px-8">
                 {/* Text Content */}
                 <motion.div
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="md:-mt-24"
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="md:-mt-16 lg:-mt-24"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-[#44d62c]/30 text-[#44d62c] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-[22px] bg-[#44d62c]/5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm border border-border/60 text-muted-foreground text-[10px] xs:text-[11px] font-medium tracking-wider uppercase mb-4 md:mb-6 bg-secondary/30">
                         <span className="relative flex h-2 w-2">
-                            <span className="absolute inline-flex h-full w-full rounded-full bg-[#44d62c] opacity-75 animate-ping"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#44d62c]"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                         </span>
                         Global Industrial Solutions
                     </div>
 
-                    <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.1]">
-                        Engineered for <span className="text-primary">Precision</span>
+                    <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-4 md:mb-6 leading-[1.1] max-w-2xl">
+                        Engineered for <span className="text-accent">Precision.</span>
                         <br />
                         Designed for Life.
                     </h1>
 
-                    <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed">
-                        Constructing the future with high-performance architectural materials and industrial-grade specifications.
+                    <p className="text-base xs:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-lg leading-relaxed font-normal">
+                        High-performance architectural solutions for residential and commercial spaces.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 md:mb-10 w-full sm:w-auto">
                         <Link href="/catalog" className="w-full sm:w-auto">
-                            <Button size="lg" className="w-full text-base md:text-lg h-12 md:h-14 relative overflow-hidden after:content-[''] after:absolute after:top-0 after:left-[-100%] after:w-full after:h-full after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent after:animate-shine">
+                            <Button variant="accent" size="lg" className="w-full text-base md:text-lg h-12 md:h-14 transition-all rounded-sm shadow-sm hover:shadow-md">
                                 EXPLORE PRODUCTS <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
                         </Link>
                         <Link href="/contact-sales" className="w-full sm:w-auto">
-                            <Button variant="secondary" size="lg" className="w-full text-base md:text-lg h-12 md:h-14">
-                                Contact Sales
+                            <Button variant="outline" size="lg" className="w-full text-base md:text-lg h-12 md:h-14 bg-background border-border/60 hover:bg-secondary text-foreground hover:text-foreground rounded-sm">
+                                Consult Our Team
                             </Button>
                         </Link>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 text-lg text-muted-foreground font-medium">
+                    <div className="flex flex-col xs:flex-row xs:items-center gap-3 xs:gap-6 md:gap-8 text-sm md:text-lg text-muted-foreground font-medium">
                         <div className="flex items-center gap-2">
-                            <Check className="text-primary h-6 w-6 flex-shrink-0" /> ISO 9001:2015
+                            <Check className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0" /> <span className="text-foreground">ISO 9001:2015</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <Check className="text-primary h-6 w-6 flex-shrink-0" /> UL Fire Rated
+                            <Check className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0" /> <span className="text-foreground">UL Fire Rated</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <Check className="text-primary h-6 w-6 flex-shrink-0" /> High-Cycle Tested
+                            <Check className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0" /> <span className="text-foreground">High-Cycle Tested</span>
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Hero Marquee */}
+                {/* Single Hero Image */}
                 <motion.div
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="relative h-[600px] md:h-[850px] max-h-[90vh] w-full overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] mt-12 md:-mt-20"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    className="relative h-[280px] xs:h-[350px] sm:h-[500px] md:h-[600px] w-full mt-8 md:mt-0"
                 >
-                    <div className="grid grid-cols-2 gap-4 h-full">
-                        {/* Column 1 - Up */}
-                        <motion.div
-                            animate={{ y: "-50%" }}
-                            transition={{
-                                duration: 40,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                            className="flex flex-col gap-4"
-                        >
-                            {firstColumn.map((src, idx) => {
-                                // Dynamic height based on image type
-                                const getImageHeight = (imageSrc: string) => {
-                                    if (imageSrc.includes('window.png')) return 'h-80'; // 320px for window
-                                    if (imageSrc.includes('whitedoor.png')) return 'h-[500px]'; // 500px for whitedoor
-                                    if (imageSrc.includes('woodendoor.png')) return 'h-[500px]'; // 500px for woodendoor
-                                    if (imageSrc.includes('choppingboard.png')) return 'h-96'; // 384px for choppingboard
-                                    return 'h-80'; // Default
-                                };
-
-                                return (
-                                    <div
-                                        key={`col1-${idx}`}
-                                        className={`relative ${getImageHeight(src)} w-full overflow-hidden bg-muted/20 flex-shrink-0`}
-                                    >
-                                        <Image
-                                            src={src}
-                                            alt="Gallery Item"
-                                            fill
-                                            className="object-cover hover:scale-105 transition-transform duration-500"
-                                            sizes="(max-width: 768px) 50vw, 25vw"
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </motion.div>
-
-                        {/* Column 2 - Down */}
-                        <motion.div
-                            animate={{ y: "0%" }}
-                            initial={{ y: "-50%" }}
-                            transition={{
-                                duration: 40,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                            className="flex flex-col gap-4"
-                        >
-                            {secondColumn.map((src, idx) => {
-                                // Dynamic height based on image type
-                                const getImageHeight = (imageSrc: string) => {
-                                    if (imageSrc.includes('window.png')) return 'h-80'; // 320px for window
-                                    if (imageSrc.includes('whitedoor.png')) return 'h-[500px]'; // 500px for whitedoor
-                                    if (imageSrc.includes('woodendoor.png')) return 'h-[500px]'; // 500px for woodendoor
-                                    if (imageSrc.includes('choppingboard.png')) return 'h-96'; // 384px for choppingboard
-                                    return 'h-80'; // Default
-                                };
-
-                                return (
-                                    <div
-                                        key={`col2-${idx}`}
-                                        className={`relative ${getImageHeight(src)} w-full overflow-hidden bg-muted/20 flex-shrink-0`}
-                                    >
-                                        <Image
-                                            src={src}
-                                            alt="Gallery Item"
-                                            fill
-                                            className="object-cover hover:scale-105 transition-transform duration-500"
-                                            sizes="(max-width: 768px) 50vw, 25vw"
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </motion.div>
+                    <div className="relative h-full w-full overflow-hidden">
+                        <Image
+                            src="/images/hero_showcase.png"
+                            alt="Premium Windows and Doors Collection"
+                            fill
+                            className="object-contain"
+                            priority
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 50vw"
+                        />
                     </div>
+                    {/* Decorative element behind */}
+                    <div className="absolute -z-10 top-8 -right-8 w-full h-full border border-border/40 rounded-lg hidden md:block" />
                 </motion.div>
             </Container>
         </section>

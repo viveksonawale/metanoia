@@ -1,77 +1,67 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
-import { Star, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
+import { motion } from "framer-motion";
 
-const reviews = [
+const testimonials = [
     {
-        name: "Chef Arjun Kapoor",
-        role: "Head Chef, The Bombay Canteen",
-        content: "The precision scale is a game changer for portion control. It's the cleanest surface I've ever worked on.",
-        rating: 5,
+        quote: "Metanoia's fire-rated systems didn't just meet our safety compliance needs—they exceeded them. The precision engineering is evident in every detail.",
+        author: "David Chen",
+        role: "Senior Lead Architect",
+        company: "Global Infrastructure Partners",
     },
     {
-        name: "Sarah Jenkins",
-        role: "Home Baker",
-        content: "I threw away all my plastic boards after one week with Metanoia. It just feels cleaner, and it looks stunning in my kitchen.",
-        rating: 5,
+        quote: "We needed a partner who could deliver custom industrial fabrication at scale without compromising quality. Metanoia delivered on time, every time.",
+        author: "Sarah Miller",
+        role: "Director of Operations",
+        company: "Apex Manufacturing Solutions",
     },
     {
-        name: "David Chen",
-        role: "Food Stylist",
-        content: "The brushed finish is not only practical but photographs beautifully. A must-have for any modern kitchen setup.",
-        rating: 5,
-    },
+        quote: "The acoustic performance of their glazing systems transformed our corporate headquarters. A perfect blend of aesthetic appeal and technical functionality.",
+        author: "James Peterson",
+        role: "Chief Facility Officer",
+        company: "NextGen Tech Park",
+    }
 ];
 
 export function Testimonials() {
     return (
-        <Section id="reviews" className="bg-muted/10 relative overflow-hidden">
-            <Container className="relative z-10">
-                <div className="text-center max-w-2xl mx-auto mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6">Trusted by Professionals</h2>
-                    <p className="text-muted-foreground text-lg">
-                        Join thousands of satisfied chefs who have upgraded to better hygiene and precision.
-                    </p>
+        <section className="py-16 md:py-24 bg-muted/30 border-t border-border/40">
+            <Container className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="mb-16">
+                    <div className="text-muted-foreground text-xs font-bold tracking-widest uppercase mb-2">Trusted By Industry Leaders</div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                        Client <span className="text-accent italic font-serif">Perspectives</span>
+                    </h2>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8">
-                    {reviews.map((review, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {testimonials.map((item, idx) => (
                         <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 8 }}
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-                            className="bg-card p-8 rounded-2xl border border-border shadow-lg relative"
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            viewport={{ once: true }}
+                            whileHover={{ y: -5, boxShadow: "0 10px 30px -10px rgba(0, 95, 158, 0.15)" }}
+                            className="group relative bg-background p-8 border border-border/50 rounded-sm shadow-sm transition-colors duration-300"
                         >
-                            <Quote className="absolute top-6 right-8 h-8 w-8 text-muted-foreground/20" />
+                            <Quote className="w-10 h-10 text-accent/20 mb-6 group-hover:text-accent transition-colors duration-500" />
 
-                            <div className="flex gap-1 mb-4">
-                                {[...Array(review.rating)].map((_, i) => (
-                                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                                ))}
-                            </div>
-
-                            <p className="text-foreground/90 italic mb-6 leading-relaxed">
-                                &quot;{review.content}&quot;
+                            <p className="text-foreground/80 leading-relaxed mb-8 italic text-lg decoration-border/30">
+                                "{item.quote}"
                             </p>
 
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-foreground font-bold">
-                                    {review.name[0]}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-sm">{review.name}</h4>
-                                    <p className="text-xs text-muted-foreground">{review.role}</p>
-                                </div>
+                            <div className="flex flex-col border-t border-border/40 pt-6">
+                                <span className="text-foreground font-bold tracking-tight text-base">{item.author}</span>
+                                <span className="text-sm text-muted-foreground font-medium mb-1">{item.role}</span>
+                                <span className="text-xs text-accent font-bold uppercase tracking-wider">{item.company}</span>
                             </div>
                         </motion.div>
                     ))}
                 </div>
             </Container>
-        </Section>
+        </section>
     );
 }

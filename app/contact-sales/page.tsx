@@ -12,21 +12,19 @@ export const metadata: Metadata = {
 
 export default function ContactSalesPage() {
     return (
-        <main className="min-h-screen bg-background pt-24 md:pt-32 pb-12 md:pb-20">
+        <main className="min-h-screen bg-background pt-24 md:pt-32 pb-24 md:pb-40">
             <Navbar />
-            {/* Background Texture */}
-            <div className="fixed inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
-            <Container className="relative z-10 max-w-6xl">
+            <Container className="relative z-10 max-w-6xl mb-24 md:mb-40">
                 <div className="grid lg:grid-cols-12 gap-8 md:gap-12 lg:gap-20">
                     {/* Left Column: Context & Trust */}
                     <div className="lg:col-span-5 space-y-8 md:space-y-12">
                         <div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-primary/30 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-4 md:mb-6 bg-primary/5">
+                            <div className="text-muted-foreground text-xs font-bold tracking-widest uppercase mb-4">
                                 Sales & Engineering
                             </div>
-                            <h1 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 mb-4 md:mb-6">
-                                Talk to Our Sales Team
+                            <h1 className="text-4xl md:text-5xl font-bold text-foreground uppercase tracking-tight mb-6">
+                                Talk to Our <span className="text-accent italic font-serif normal-case">Sales Team</span>
                             </h1>
                             <p className="text-lg text-muted-foreground leading-relaxed">
                                 Get technical guidance, pricing, and product recommendations for your project. Our engineers are ready to assist with specifications and custom requirements.
@@ -40,20 +38,20 @@ export default function ContactSalesPage() {
                             </h3>
                             <ul className="space-y-4">
                                 <li className="flex items-center gap-3 text-muted-foreground">
-                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                        <Check className="w-4 h-4 text-primary" />
+                                    <div className="w-8 h-8 rounded-sm bg-secondary flex items-center justify-center shrink-0 border border-border">
+                                        <Check className="w-4 h-4 text-accent" />
                                     </div>
                                     <span className="text-sm">ISO 9001:2015 Certified Manufacturing</span>
                                 </li>
                                 <li className="flex items-center gap-3 text-muted-foreground">
-                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                        <Check className="w-4 h-4 text-primary" />
+                                    <div className="w-8 h-8 rounded-sm bg-secondary flex items-center justify-center shrink-0 border border-border">
+                                        <Check className="w-4 h-4 text-accent" />
                                     </div>
                                     <span className="text-sm">High-Performance & Fire-Rated Systems</span>
                                 </li>
                                 <li className="flex items-center gap-3 text-muted-foreground">
-                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                        <Check className="w-4 h-4 text-primary" />
+                                    <div className="w-8 h-8 rounded-sm bg-secondary flex items-center justify-center shrink-0 border border-border">
+                                        <Check className="w-4 h-4 text-accent" />
                                     </div>
                                     <span className="text-sm">Global Logistics & On-Site Support</span>
                                 </li>
@@ -61,17 +59,17 @@ export default function ContactSalesPage() {
                         </div>
 
                         {/* Direct Contact Info */}
-                        <div className="p-6 rounded-lg border border-border bg-card/50 backdrop-blur-sm">
+                        <div className="p-6 rounded-sm border border-border bg-secondary/30">
                             <h3 className="text-sm font-bold uppercase tracking-widest text-foreground/80 mb-4">
                                 Direct Contact
                             </h3>
                             <div className="space-y-4 text-sm">
-                                <div className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-                                    <Phone className="w-4 h-4" />
+                                <div className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors cursor-pointer group">
+                                    <Phone className="w-4 h-4 group-hover:text-accent transition-colors" />
                                     <span>+1 (800) 123-4567</span>
                                 </div>
-                                <div className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-                                    <Mail className="w-4 h-4" />
+                                <div className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors cursor-pointer group">
+                                    <Mail className="w-4 h-4 group-hover:text-accent transition-colors" />
                                     <span>sales@industrial.com</span>
                                 </div>
                                 <div className="flex items-center gap-3 text-muted-foreground">
@@ -84,7 +82,7 @@ export default function ContactSalesPage() {
 
                     {/* Right Column: Form */}
                     <div className="lg:col-span-7">
-                        <div className="bg-card/30 backdrop-blur-md border border-white/5 rounded-xl p-6 md:p-8 lg:p-10 shadow-2xl">
+                        <div className="bg-card border border-border rounded-sm p-6 md:p-8 lg:p-10 shadow-lg">
                             <ContactForm />
                         </div>
                     </div>

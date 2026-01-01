@@ -29,13 +29,13 @@ export function ContactForm() {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-card border border-border p-8 md:p-12 text-center rounded-lg shadow-2xl relative overflow-hidden"
+                className="bg-card border border-border p-8 md:p-12 text-center rounded-sm shadow-sm relative overflow-hidden"
             >
                 {/* Background Glow */}
-                <div className="absolute top-0 center w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+                <div className="absolute top-0 center w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50" />
 
-                <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <Check className="w-8 h-8 text-primary" />
+                <div className="mx-auto w-16 h-16 bg-accent/10 rounded-sm flex items-center justify-center mb-6">
+                    <Check className="w-8 h-8 text-accent" />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                     Enquiry Received
@@ -43,8 +43,8 @@ export function ContactForm() {
                 <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
                     Thank you. Our sales team will review your project requirements and contact you shortly.
                 </p>
-                <div className="inline-flex items-center gap-2 text-sm text-primary font-medium bg-primary/5 px-4 py-2 rounded-full">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <div className="inline-flex items-center gap-2 text-sm text-accent font-medium bg-secondary px-4 py-2 rounded-sm border border-border">
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                     Typically responds within 1 business day
                 </div>
             </motion.div>
@@ -55,30 +55,30 @@ export function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
-                    <Label htmlFor="firstName">Full Name <span className="text-primary">*</span></Label>
-                    <Input id="firstName" required placeholder="John Doe" />
+                    <Label htmlFor="firstName">Full Name <span className="text-accent">*</span></Label>
+                    <Input id="firstName" required placeholder="John Doe" className="rounded-sm" />
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="company">Company Name <span className="text-primary">*</span></Label>
-                    <Input id="company" required placeholder="Acme Industries" />
-                </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <div className="space-y-2">
-                    <Label htmlFor="email">Work Email <span className="text-primary">*</span></Label>
-                    <Input id="email" type="email" required placeholder="john@company.com" />
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number <span className="text-primary">*</span></Label>
-                    <Input id="phone" type="tel" required placeholder="+1 (555) 000-0000" />
+                    <Label htmlFor="company">Company Name <span className="text-accent">*</span></Label>
+                    <Input id="company" required placeholder="Acme Industries" className="rounded-sm" />
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
-                    <Label htmlFor="category">Product Category <span className="text-primary">*</span></Label>
-                    <Select id="category" required defaultValue="">
+                    <Label htmlFor="email">Work Email <span className="text-accent">*</span></Label>
+                    <Input id="email" type="email" required placeholder="john@company.com" className="rounded-sm" />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number <span className="text-accent">*</span></Label>
+                    <Input id="phone" type="tel" required placeholder="+1 (555) 000-0000" className="rounded-sm" />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-2">
+                    <Label htmlFor="category">Product Category <span className="text-accent">*</span></Label>
+                    <Select id="category" required defaultValue="" className="rounded-sm">
                         <option value="" disabled>Select a Category</option>
                         <option value="doors">Industrial Doors</option>
                         <option value="windows">High-Performance Windows</option>
@@ -88,8 +88,8 @@ export function ContactForm() {
                     </Select>
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="projectType">Project Type <span className="text-primary">*</span></Label>
-                    <Select id="projectType" required defaultValue="">
+                    <Label htmlFor="projectType">Project Type <span className="text-accent">*</span></Label>
+                    <Select id="projectType" required defaultValue="" className="rounded-sm">
                         <option value="" disabled>Select Project Type</option>
                         <option value="commercial">Commercial Building</option>
                         <option value="industrial">Industrial Facility</option>
@@ -101,8 +101,8 @@ export function ContactForm() {
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="scope">Estimated Quantity / Scope <span className="text-primary">*</span></Label>
-                <Input id="scope" required placeholder="e.g. 500 sq ft, 20 units, entire facility..." />
+                <Label htmlFor="scope">Estimated Quantity / Scope <span className="text-accent">*</span></Label>
+                <Input id="scope" required placeholder="e.g. 500 sq ft, 20 units, entire facility..." className="rounded-sm" />
             </div>
 
             <div className="space-y-2">
@@ -110,14 +110,15 @@ export function ContactForm() {
                 <Textarea
                     id="message"
                     placeholder="Describe your project specifications, timeline, and any specific requirements..."
-                    className="min-h-[150px]"
+                    className="min-h-[150px] rounded-sm"
                 />
             </div>
 
             <Button
                 type="submit"
                 size="lg"
-                className="w-full text-lg h-14"
+                variant="accent"
+                className="w-full text-lg h-14 rounded-sm"
                 disabled={isSubmitting}
             >
                 {isSubmitting ? (

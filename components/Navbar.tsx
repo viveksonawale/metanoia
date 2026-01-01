@@ -391,442 +391,432 @@ export function Navbar() {
     ];
 
     return (
-        <nav
-            className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black text-[#888]",
-                !activeMegaMenu && "border-b border-[#44d62c]" // Only show border when mega menu is closed
-            )}
-            onMouseLeave={handleMouseLeave}
-        >
-            <div className="max-w-[1400px] mx-auto px-4 h-[60px] flex items-center justify-between">
-                {/* Mobile: Hamburger Menu (Left) */}
-                <div className="md:hidden">
-                    <button
-                        className="p-2 text-[#999] hover:text-white transition-colors"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
-                </div>
-
-                {/* Logo - Centered on mobile, left on desktop */}
-                <Link href="/" className="flex items-center justify-center w-12 h-12 shrink-0 md:mr-auto">
-                    <div className="relative w-10 h-10">
-                        <Image
-                            src="/images/logo-shield.png"
-                            alt="Metanoia"
-                            fill
-                            className="object-contain hover:brightness-125 transition-all duration-300"
-                            priority
-                        />
-                    </div>
-                </Link>
-
-                {/* Desktop Links - Centered */}
-                <div className="hidden md:flex items-center justify-center flex-1 gap-12">
-                    {navLinks.map((link) => (
-                        <div
-                            key={link.label}
-                            className="relative"
-                            onMouseEnter={() => handleMouseEnter(link.label)}
-                        >
-                            <Link
-                                href={link.href}
-                                className={cn(
-                                    "text-sm uppercase tracking-wider font-bold transition-colors duration-200 relative group py-5 block",
-                                    activeMegaMenu === link.label ? "text-white" : "text-[#999]"
-                                )}
-                            >
-                                <span className="group-hover:text-white transition-colors duration-200">
-                                    {link.label}
-                                </span>
-                                {activeMegaMenu === link.label && (
-                                    <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#44d62c] shadow-[0_0_8px_rgba(68,214,44,0.5)]" />
-                                )}
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Right Icons - Desktop */}
-                <div className="hidden md:flex items-center gap-6 text-[#999]">
-                    <div className="search-container flex items-center">
-                        <button
-                            className="hover:text-white transition-colors"
-                            onClick={() => setIsSearchOpen(!isSearchOpen)}
-                        >
-                            <Search className="w-5 h-5" />
-                        </button>
-                    </div>
-                    <div className="cart-container flex items-center">
-                        <button
-                            className="hover:text-white transition-colors relative"
-                            onClick={() => setIsCartOpen(!isCartOpen)}
-                        >
-                            <ShoppingCart className="w-5 h-5" />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Icons - Right (Search & Cart) */}
-                <div className="md:hidden flex items-center gap-4 text-[#999]">
-                    <div className="search-container flex items-center">
-                        <button
-                            className="hover:text-white transition-colors"
-                            onClick={() => setIsSearchOpen(!isSearchOpen)}
-                        >
-                            <Search className="w-5 h-5" />
-                        </button>
-                    </div>
-                    <div className="cart-container flex items-center">
-                        <button
-                            className="hover:text-white transition-colors relative"
-                            onClick={() => setIsCartOpen(!isCartOpen)}
-                        >
-                            <ShoppingCart className="w-5 h-5" />
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Search Bar */}
+        <>
+            {/* Blur Overlay - Desktop Only */}
             <AnimatePresence>
-                {
-                    isSearchOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="border-t border-[#222] overflow-hidden search-container"
-                        >
-                            <div className="max-w-[1400px] mx-auto px-4 py-4">
-                                <div className="relative">
-                                    <input
-                                        type="text"
-                                        placeholder="Search products, industries, resources..."
-                                        className="w-full bg-[#111] text-white px-4 py-3 pr-12 rounded border border-[#333] focus:border-[#44d62c] focus:outline-none transition-colors"
-                                        autoFocus
-                                    />
-                                    <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#44d62c]" />
-                                </div>
-                            </div>
-                        </motion.div>
-                    )
-                }
-            </AnimatePresence>
-
-            {/* Cart Dropdown */}
-            <AnimatePresence>
-                {isCartOpen && (
+                {activeMegaMenu && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute right-4 top-[70px] w-80 bg-[#1a1a1a] border border-[#333] rounded-lg shadow-2xl z-50 cart-container"
-                    >
-                        {/* Empty Cart Message */}
-                        <div className="p-6 border-b border-[#333]">
-                            <p className="text-[#999] text-center text-sm">Your Cart is empty.</p>
-                        </div>
-
-                        {/* Cart Menu Items */}
-                        <div className="p-4">
-                            <Link
-                                href="#"
-                                className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#222] rounded transition-colors"
-                                onClick={() => setIsCartOpen(false)}
-                            >
-                                <ShoppingCart className="w-5 h-5 text-[#44d62c]" />
-                                <span className="text-sm font-medium">Cart</span>
-                            </Link>
-                            <Link
-                                href="#"
-                                className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#222] rounded transition-colors"
-                                onClick={() => setIsCartOpen(false)}
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                </svg>
-                                <span className="text-sm font-medium">Orders</span>
-                            </Link>
-                            <Link
-                                href="#"
-                                className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#222] rounded transition-colors"
-                                onClick={() => setIsCartOpen(false)}
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                <span className="text-sm font-medium">Account</span>
-                            </Link>
-                            <div className="border-t border-[#333] my-2"></div>
-                            <Link
-                                href="#"
-                                className="flex items-center gap-3 px-4 py-3 text-white hover:bg-[#222] rounded transition-colors"
-                                onClick={() => setIsCartOpen(false)}
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                                </svg>
-                                <span className="text-sm font-medium">Log In</span>
-                            </Link>
-                        </div>
-                    </motion.div>
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="fixed inset-0 z-40 backdrop-blur-sm bg-black/5 hidden md:block transition-all duration-300"
+                        style={{ top: '60px' }}
+                    />
                 )}
             </AnimatePresence>
 
-            {/* Mega Menu Dropdown */}
-            <AnimatePresence>
-                {
-                    activeMegaMenu && megaMenuData[activeMegaMenu as keyof typeof megaMenuData] && (
-                        <>
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.15, delay: 0.15 }} // Delay content until line slides
-                                className="absolute left-0 right-0 top-[62px] bg-black shadow-2xl"
-                                onMouseEnter={() => {
-                                    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                                }}
-                                onMouseLeave={handleMouseLeave}
+            <nav
+                className={cn(
+                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+                )}
+                onMouseLeave={handleMouseLeave}
+            >
+                {/* Navbar Background Layer (Separated to avoid stacking context issues for fixed children) */}
+                <div className={cn(
+                    "absolute inset-0 bg-background md:bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300",
+                    !activeMegaMenu && "border-border"
+                )} />
+
+                <div className="relative max-w-[1400px] mx-auto px-4 h-[60px] flex items-center justify-between z-10">
+                    {/* Mobile: Hamburger Menu (Left) */}
+                    <div className="md:hidden">
+                        <button
+                            className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-foreground/70 hover:text-accent transition-colors"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
+
+                    {/* Logo - Centered on mobile, left on desktop */}
+                    <Link href="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center shrink-0 md:mr-auto">
+                        <div className="relative w-10 h-10">
+                            <Image
+                                src="/images/logo.jpg"
+                                alt="Metanoia"
+                                fill
+                                className="object-contain transition-all duration-300"
+                                priority
+                            />
+                        </div>
+                    </Link>
+
+                    {/* Desktop Links - Centered */}
+                    <div className="hidden md:flex items-center justify-center flex-1 gap-12">
+                        {navLinks.map((link) => (
+                            <div
+                                key={link.label}
+                                className="relative"
+                                onMouseEnter={() => handleMouseEnter(link.label)}
                             >
-                                {/* Animated Green Border - slides to bottom */}
-                                <motion.div
-                                    initial={{ height: 0 }}
-                                    animate={{ height: "100%" }}
-                                    exit={{ height: 0 }}
-                                    transition={{ duration: 0.3, ease: "easeOut" }}
-                                    className="absolute left-0 right-0 bottom-0 pointer-events-none"
-                                    style={{ transformOrigin: "bottom" }}
+                                <Link
+                                    href={link.href}
+                                    className={cn(
+                                        "text-sm uppercase tracking-wide font-medium transition-colors duration-200 relative group py-5 block",
+                                        activeMegaMenu === link.label ? "text-primary" : "text-muted-foreground hover:text-primary"
+                                    )}
                                 >
-                                    <div className="absolute bottom-0 left-0 right-0 h-[0.5px] bg-[#44d62c] shadow-[0_0_8px_#44d62c]" />
-                                </motion.div>
-                                <div className="max-w-[1400px] mx-auto px-4 py-8">
-                                    <div className="flex gap-8">
-                                        {/* Left Column - Explore Categories */}
-                                        <div className="w-64">
-                                            <div className="text-[#666] text-xs uppercase tracking-wider mb-3 font-semibold">
-                                                Explore
-                                            </div>
-                                            <div className="space-y-1">
-                                                {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].categories.map((category, idx) => (
-                                                    <div
-                                                        key={idx}
-                                                        className="group"
-                                                        onClick={() => setHoveredCategory(hoveredCategory === idx ? null : idx)}
-                                                    >
-                                                        <div className={cn(
-                                                            "flex items-center justify-between py-2 px-3 rounded hover:bg-[#111] transition-colors cursor-pointer",
-                                                            hoveredCategory === idx && "bg-[#111]"
-                                                        )}>
-                                                            <span className={cn(
-                                                                "text-base transition-colors font-medium",
-                                                                hoveredCategory === idx ? "text-white" : "text-[#999] group-hover:text-white"
-                                                            )}>
-                                                                {category.title}
-                                                            </span>
-                                                            <ChevronRight className={cn(
-                                                                "w-4 h-4 text-[#44d62c] transition-opacity",
-                                                                hoveredCategory === idx ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                                                            )} />
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
+                                    <span className="group-hover:text-primary transition-colors duration-200">
+                                        {link.label}
+                                    </span>
+                                    {activeMegaMenu === link.label && (
+                                        <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent" />
+                                    )}
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
 
-                                        {/* Center Column - Subcategories (appears on click) */}
-                                        <AnimatePresence mode="wait">
-                                            {hoveredCategory !== null && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, width: 0 }}
-                                                    animate={{ opacity: 1, width: "auto" }}
-                                                    exit={{ opacity: 0, width: 0 }}
-                                                    transition={{ duration: 0.3 }}
-                                                    className="flex-1 border-l border-[#222] pl-8 overflow-hidden"
-                                                >
-                                                    <div className="text-[#666] text-xs uppercase tracking-wider mb-3 font-semibold">
-                                                        Explore
-                                                    </div>
-                                                    <div className="text-[#44d62c] text-base font-semibold mb-4">
-                                                        {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].categories[hoveredCategory].title}
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].categories[
-                                                            hoveredCategory
-                                                        ].subcategories.map((sub, idx) => (
-                                                            <Link
-                                                                key={idx}
-                                                                href="#"
-                                                                className="block text-base text-[#999] hover:text-white transition-colors py-1"
-                                                            >
-                                                                {sub}
-                                                            </Link>
-                                                        ))}
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
+                    {/* Right Icons - Desktop */}
+                    <div className="hidden md:flex items-center gap-6 text-foreground/70">
+                        <div className="search-container flex items-center">
+                            <button
+                                className="p-2 hover:text-accent transition-colors"
+                                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                            >
+                                <Search className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <div className="cart-container flex items-center">
+                            <button
+                                className="hover:text-accent transition-colors relative"
+                                onClick={() => setIsCartOpen(!isCartOpen)}
+                            >
+                                <ShoppingCart className="w-5 h-5" />
+                            </button>
+                        </div>
+                    </div>
 
-                                        {/* Right Column - More About */}
-                                        <div className="w-64 border-l border-[#222] pl-8">
-                                            <div className="text-[#666] text-xs uppercase tracking-wider mb-3 font-semibold">
-                                                More About
-                                            </div>
-                                            <div className="space-y-2">
-                                                {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].moreAbout.map(
-                                                    (item, idx) => (
-                                                        <Link
-                                                            key={idx}
-                                                            href={item === "Product Catalog" ? "/catalog" : "#"}
-                                                            className="block text-base text-[#999] hover:text-[#44d62c] transition-colors py-1"
-                                                        >
-                                                            {item}
-                                                        </Link>
-                                                    )
-                                                )}
-                                            </div>
-                                        </div>
+                    {/* Mobile Icons - Right (Search & Cart) */}
+                    <div className="md:hidden flex items-center gap-1 text-foreground/70">
+                        <div className="search-container flex items-center">
+                            <button
+                                className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-accent transition-colors"
+                                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                            >
+                                <Search className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <div className="cart-container flex items-center">
+                            <button
+                                className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-accent transition-colors relative"
+                                onClick={() => setIsCartOpen(!isCartOpen)}
+                            >
+                                <ShoppingCart className="w-5 h-5" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Search Bar */}
+                <AnimatePresence>
+                    {
+                        isSearchOpen && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="relative border-t border-border overflow-hidden search-container bg-background z-20"
+                            >
+                                <div className="max-w-[1400px] mx-auto px-4 py-4">
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            placeholder="Search products, industries, resources..."
+                                            className="w-full bg-secondary text-foreground px-4 py-3 pr-12 rounded-md border border-input focus:border-primary focus:outline-none transition-colors"
+                                            autoFocus
+                                        />
+                                        <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     </div>
                                 </div>
                             </motion.div>
-                        </>
-                    )
-                }
-            </AnimatePresence >
+                        )
+                    }
+                </AnimatePresence>
 
-            {/* Mobile Nav Overlay */}
-            <AnimatePresence>
-                {
-                    isOpen && (
+                {/* Cart Dropdown */}
+                <AnimatePresence>
+                    {isCartOpen && (
                         <motion.div
-                            initial={{ opacity: 0, x: -100 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -100 }}
-                            transition={{ duration: 0.3 }}
-                            className="md:hidden bg-black fixed inset-0 top-0 z-50 overflow-auto"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute right-4 top-[65px] w-80 bg-background border border-border rounded-md shadow-2xl z-[60] cart-container overflow-hidden"
                         >
-                            {/* Mobile Header */}
-                            <div className="flex items-center justify-between p-4 border-b border-[#222]">
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="p-2 text-white hover:text-[#44d62c] transition-colors"
-                                >
-                                    <X className="w-6 h-6" />
-                                </button>
-                                <Link href="/" onClick={() => setIsOpen(false)}>
-                                    <div className="relative w-8 h-8">
-                                        <Image
-                                            src="/images/logo-shield.png"
-                                            alt="Metanoia"
-                                            fill
-                                            className="object-contain"
-                                        />
-                                    </div>
-                                </Link>
-                                <div className="w-10" /> {/* Spacer for centering */}
+                            {/* Empty Cart Message */}
+                            <div className="p-6 border-b border-border">
+                                <p className="text-muted-foreground text-center text-sm">Your Cart is empty.</p>
                             </div>
 
-                            {/* Mobile Search */}
-                            <div className="p-4 border-b border-[#222]">
-                                <div className="relative">
-                                    <input
-                                        type="text"
-                                        placeholder="Search products"
-                                        className="w-full bg-[#1a1a1a] text-white px-4 py-3 pl-10 rounded border border-[#333] focus:border-[#44d62c] focus:outline-none transition-colors"
-                                    />
-                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#666]" />
-                                </div>
-                            </div>
-
-                            {/* Mobile Menu Items */}
+                            {/* Cart Menu Items */}
                             <div className="p-4">
-                                {navLinks.map((link) => (
-                                    <div key={link.label} className="border-b border-[#222]">
-                                        {link.hasMegaMenu ? (
-                                            <button
-                                                onClick={() => setActiveMegaMenu(activeMegaMenu === link.label ? null : link.label)}
-                                                className="w-full flex items-center justify-between py-4 text-left text-white hover:text-[#44d62c] transition-colors"
-                                            >
-                                                <span className="text-base font-medium">{link.label}</span>
-                                                <ChevronRight className={cn(
-                                                    "w-5 h-5 transition-transform",
-                                                    activeMegaMenu === link.label && "rotate-90"
-                                                )} />
-                                            </button>
-                                        ) : (
-                                            <Link
-                                                href={link.href}
-                                                onClick={() => setIsOpen(false)}
-                                                className="w-full flex items-center justify-between py-4 text-white hover:text-[#44d62c] transition-colors"
-                                            >
-                                                <span className="text-base font-medium">{link.label}</span>
-                                                <ChevronRight className="w-5 h-5" />
-                                            </Link>
-                                        )}
-
-                                        {/* Expandable Submenu */}
-                                        <AnimatePresence>
-                                            {link.hasMegaMenu && activeMegaMenu === link.label && (
-                                                <motion.div
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: "auto", opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    transition={{ duration: 0.2 }}
-                                                    className="overflow-hidden bg-[#0a0a0a] -mx-4 px-4"
-                                                >
-                                                    <div className="py-4 space-y-4">
-                                                        {megaMenuData[link.label as keyof typeof megaMenuData]?.categories.map((category, idx) => (
-                                                            <div key={idx}>
-                                                                <button
-                                                                    onClick={() => setHoveredCategory(hoveredCategory === idx ? null : idx)}
-                                                                    className="w-full flex items-center justify-between py-2 text-left text-[#999] hover:text-white transition-colors"
-                                                                >
-                                                                    <span className="text-sm font-medium">{category.title}</span>
-                                                                    <ChevronRight className={cn(
-                                                                        "w-4 h-4 transition-transform",
-                                                                        hoveredCategory === idx && "rotate-90"
-                                                                    )} />
-                                                                </button>
-
-                                                                {/* Subcategories */}
-                                                                <AnimatePresence>
-                                                                    {hoveredCategory === idx && (
-                                                                        <motion.div
-                                                                            initial={{ height: 0, opacity: 0 }}
-                                                                            animate={{ height: "auto", opacity: 1 }}
-                                                                            exit={{ height: 0, opacity: 0 }}
-                                                                            transition={{ duration: 0.2 }}
-                                                                            className="overflow-hidden pl-4 mt-2 space-y-2"
-                                                                        >
-                                                                            {category.subcategories.map((sub, subIdx) => (
-                                                                                <Link
-                                                                                    key={subIdx}
-                                                                                    href="#"
-                                                                                    onClick={() => setIsOpen(false)}
-                                                                                    className="block py-1 text-sm text-[#777] hover:text-[#44d62c] transition-colors"
-                                                                                >
-                                                                                    {sub}
-                                                                                </Link>
-                                                                            ))}
-                                                                        </motion.div>
-                                                                    )}
-                                                                </AnimatePresence>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
-                                ))}
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-md transition-colors"
+                                    onClick={() => setIsCartOpen(false)}
+                                >
+                                    <ShoppingCart className="w-5 h-5 text-primary" />
+                                    <span className="text-sm font-medium">Cart</span>
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-sm transition-colors"
+                                    onClick={() => setIsCartOpen(false)}
+                                >
+                                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    </svg>
+                                    <span className="text-sm font-medium">Orders</span>
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-sm transition-colors"
+                                    onClick={() => setIsCartOpen(false)}
+                                >
+                                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    <span className="text-sm font-medium">Account</span>
+                                </Link>
+                                <div className="border-t border-border my-2"></div>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-sm transition-colors"
+                                    onClick={() => setIsCartOpen(false)}
+                                >
+                                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                    </svg>
+                                    <span className="text-sm font-medium">Log In</span>
+                                </Link>
                             </div>
                         </motion.div>
                     )}
-            </AnimatePresence>
-        </nav>
+                </AnimatePresence>
+
+                {/* Mega Menu Dropdown */}
+                <AnimatePresence>
+                    {
+                        activeMegaMenu && megaMenuData[activeMegaMenu as keyof typeof megaMenuData] && (
+                            <>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.15, delay: 0.15 }} // Delay content until line slides
+                                    className="hidden md:block absolute left-0 right-0 top-[60px] bg-background shadow-xl border-b border-border"
+                                    onMouseEnter={() => {
+                                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                                    }}
+                                    onMouseLeave={handleMouseLeave}
+                                >
+                                    <div className="max-w-[1400px] mx-auto px-4 py-8">
+                                        <div className="flex gap-8">
+                                            {/* Left Column - Explore Categories */}
+                                            <div className="w-64">
+                                                <div className="text-muted-foreground text-xs uppercase tracking-wider mb-3 font-semibold">
+                                                    Explore
+                                                </div>
+                                                <div className="space-y-1">
+                                                    {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].categories.map((category, idx) => (
+                                                        <div
+                                                            key={idx}
+                                                            className="group"
+                                                            onClick={() => setHoveredCategory(hoveredCategory === idx ? null : idx)}
+                                                        >
+                                                            <div className={cn(
+                                                                "flex items-center justify-between py-2 px-3 rounded-md hover:bg-secondary transition-colors cursor-pointer",
+                                                                hoveredCategory === idx && "bg-secondary"
+                                                            )}>
+                                                                <span className={cn(
+                                                                    "text-base transition-colors font-medium",
+                                                                    hoveredCategory === idx ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                                                                )}>
+                                                                    {category.title}
+                                                                </span>
+                                                                <ChevronRight className={cn(
+                                                                    "w-4 h-4 text-primary transition-opacity",
+                                                                    hoveredCategory === idx ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                                                                )} />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Center Column - Subcategories (appears on click) */}
+                                            <AnimatePresence mode="wait">
+                                                {hoveredCategory !== null && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, width: 0 }}
+                                                        animate={{ opacity: 1, width: "auto" }}
+                                                        exit={{ opacity: 0, width: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        className="flex-1 border-l border-border pl-8 overflow-hidden"
+                                                    >
+                                                        <div className="text-muted-foreground text-xs uppercase tracking-wider mb-3 font-semibold">
+                                                            Explore
+                                                        </div>
+                                                        <div className="text-accent text-base font-semibold mb-4">
+                                                            {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].categories[hoveredCategory].title}
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].categories[
+                                                                hoveredCategory
+                                                            ].subcategories.map((sub, idx) => (
+                                                                <Link
+                                                                    key={idx}
+                                                                    href="#"
+                                                                    className="block text-base text-muted-foreground hover:text-primary transition-colors py-1"
+                                                                >
+                                                                    {sub}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+
+                                            {/* Right Column - More About */}
+                                            <div className="w-64 border-l border-border pl-8">
+                                                <div className="text-muted-foreground text-xs uppercase tracking-wider mb-3 font-semibold">
+                                                    More About
+                                                </div>
+                                                <div className="space-y-2">
+                                                    {megaMenuData[activeMegaMenu as keyof typeof megaMenuData].moreAbout.map(
+                                                        (item, idx) => (
+                                                            <Link
+                                                                key={idx}
+                                                                href={item === "Product Catalog" ? "/catalog" : "#"}
+                                                                className="block text-base text-muted-foreground hover:text-primary transition-colors py-1"
+                                                            >
+                                                                {item}
+                                                            </Link>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </>
+                        )
+                    }
+                </AnimatePresence >
+
+                {/* Mobile Nav Overlay */}
+                <AnimatePresence>
+                    {
+                        isOpen && (
+                            <motion.div
+                                initial={{ opacity: 0, x: "-100%" }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: "-100%" }}
+                                transition={{ duration: 0.3, type: "spring", damping: 25, stiffness: 200 }}
+                                className="fixed top-[60px] left-0 right-0 h-[calc(100vh-60px)] z-[40] bg-background md:hidden overflow-y-auto border-t border-border"
+                            >
+
+                                {/* Mobile Search */}
+                                <div className="p-4 border-b border-border">
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            placeholder="Search products"
+                                            className="w-full bg-secondary text-foreground px-4 py-3 pl-10 rounded-md border border-input focus:border-primary focus:outline-none transition-colors"
+                                        />
+                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                                    </div>
+                                </div>
+
+                                {/* Mobile Menu Items */}
+                                <div className="p-4">
+                                    {navLinks.map((link) => (
+                                        <div key={link.label} className="border-b border-border">
+                                            {link.hasMegaMenu ? (
+                                                <button
+                                                    onClick={() => setActiveMegaMenu(activeMegaMenu === link.label ? null : link.label)}
+                                                    className="w-full flex items-center justify-between py-4 text-left text-foreground hover:text-primary transition-colors"
+                                                >
+                                                    <span className="text-base font-medium">{link.label}</span>
+                                                    <ChevronRight className={cn(
+                                                        "w-5 h-5 transition-transform",
+                                                        activeMegaMenu === link.label && "rotate-90"
+                                                    )} />
+                                                </button>
+                                            ) : (
+                                                <Link
+                                                    href={link.href}
+                                                    onClick={() => setIsOpen(false)}
+                                                    className="w-full flex items-center justify-between py-4 text-foreground hover:text-primary transition-colors"
+                                                >
+                                                    <span className="text-base font-medium">{link.label}</span>
+                                                    <ChevronRight className="w-5 h-5" />
+                                                </Link>
+                                            )}
+
+                                            {/* Expandable Submenu */}
+                                            <AnimatePresence>
+                                                {link.hasMegaMenu && activeMegaMenu === link.label && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.2 }}
+                                                        className="overflow-hidden bg-secondary/50 -mx-4 px-4"
+                                                    >
+                                                        <div className="py-4 space-y-4">
+                                                            {megaMenuData[link.label as keyof typeof megaMenuData]?.categories.map((category, idx) => (
+                                                                <div key={idx}>
+                                                                    <button
+                                                                        onClick={() => setHoveredCategory(hoveredCategory === idx ? null : idx)}
+                                                                        className="w-full flex items-center justify-between py-2 text-left text-muted-foreground hover:text-foreground transition-colors"
+                                                                    >
+                                                                        <span className="text-sm font-medium">{category.title}</span>
+                                                                        <ChevronRight className={cn(
+                                                                            "w-4 h-4 transition-transform",
+                                                                            hoveredCategory === idx && "rotate-90"
+                                                                        )} />
+                                                                    </button>
+
+                                                                    {/* Subcategories */}
+                                                                    <AnimatePresence>
+                                                                        {hoveredCategory === idx && (
+                                                                            <motion.div
+                                                                                initial={{ height: 0, opacity: 0 }}
+                                                                                animate={{ height: "auto", opacity: 1 }}
+                                                                                exit={{ height: 0, opacity: 0 }}
+                                                                                transition={{ duration: 0.2 }}
+                                                                                className="overflow-hidden pl-4 mt-2 space-y-2"
+                                                                            >
+                                                                                {category.subcategories.map((sub, subIdx) => (
+                                                                                    <Link
+                                                                                        key={subIdx}
+                                                                                        href="#"
+                                                                                        onClick={() => setIsOpen(false)}
+                                                                                        className="block py-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+                                                                                    >
+                                                                                        {sub}
+                                                                                    </Link>
+                                                                                ))}
+                                                                            </motion.div>
+                                                                        )}
+                                                                    </AnimatePresence>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                </AnimatePresence>
+            </nav>
+        </>
     );
 }

@@ -59,7 +59,7 @@ export function Features() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
-                            className="group relative p-8 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-200 hover:-translate-y-1 cursor-default"
+                            className="group relative p-8 rounded-2xl bg-card border border-border/50 hover:border-border transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 cursor-default"
                         >
                             <feature.icon className="h-12 w-12 mb-6 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
 

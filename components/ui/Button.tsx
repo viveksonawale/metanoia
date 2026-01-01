@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
+    variant?: "primary" | "secondary" | "outline" | "ghost" | "link" | "accent";
     size?: "default" | "sm" | "lg" | "icon";
     isLoading?: boolean;
 }
@@ -14,11 +14,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = "primary", size = "default", isLoading, children, ...props }, ref) => {
 
         const variants = {
-            primary: "bg-primary text-black hover:brightness-110 border border-transparent font-bold tracking-widest uppercase",
-            secondary: "bg-transparent border border-primary text-primary hover:bg-primary/10 font-bold tracking-widest uppercase",
-            outline: "border border-border bg-transparent hover:border-primary hover:text-primary font-bold tracking-widest uppercase",
-            ghost: "hover:bg-muted hover:text-foreground font-bold tracking-widest uppercase",
-            link: "text-primary underline-offset-4 hover:underline hover:brightness-110 uppercase tracking-widest",
+            primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm font-medium",
+            secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium",
+            accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm font-medium",
+            outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground font-medium",
+            ghost: "hover:bg-accent hover:text-accent-foreground font-medium",
+            link: "text-primary underline-offset-4 hover:underline",
         };
 
         const sizes = {

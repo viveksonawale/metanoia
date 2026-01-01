@@ -53,6 +53,7 @@ export interface Category {
     shortDescription: string;
     fullDescription: string;
     icon: any;
+    image: string; // New field for card background
     heroImage: string;
     features: Feature[];
     specifications: {
@@ -73,6 +74,7 @@ export const categoryData: Category[] = [
         shortDescription: "Engineered specifications for high-performance industrial applications.",
         fullDescription: "Our Fire Rated Doors are engineered to provide maximum safety and protection in commercial and industrial environments. Certified to withstand extreme temperatures and prevent the spread of fire and smoke, these doors combine robust security with architectural aesthetics. Available in various fire ratings (60, 90, 120, 180 minutes), they ensure compliance with the strictest building codes while maintaining seamless operation.",
         icon: Shield,
+        image: "/images/fire_rated_door_1767248959814.png",
         heroImage: "/images/hero-fire-door.jpg",
         features: [
             {
@@ -148,6 +150,7 @@ export const categoryData: Category[] = [
         shortDescription: "Engineered specifications for high-performance industrial applications.",
         fullDescription: "Our window and glazing systems combine thermal efficiency with sleek modern aesthetics. From robust aluminium sliding systems to energy-efficient uPVC windows, we offer solutions that enhance building performance while maximizing natural light and visual appeal.",
         icon: AppWindow,
+        image: "/images/windows_glazing_1767249027030.png",
         heroImage: "/images/hero-windows.jpg",
         features: [
             {
@@ -211,6 +214,7 @@ export const categoryData: Category[] = [
         shortDescription: "Engineered specifications for high-performance industrial applications.",
         fullDescription: "Transform building exteriors with our advanced façade systems. We specialize in structural glazing, unitized curtain walls, and architectural cladding that define modern skylines. Our systems are engineered to accommodate structural movements while providing superior weather protection and thermal comfort.",
         icon: Building2,
+        image: "/images/facade_system_1767249049916.png",
         heroImage: "/images/hero-facade.jpg",
         features: [
             {
@@ -274,6 +278,7 @@ export const categoryData: Category[] = [
         shortDescription: "Engineered specifications for high-performance industrial applications.",
         fullDescription: "Hygiene meets design in our Kitchen & Interior Solutions. We manufacture premium stainless steel modular kitchen components, storage systems, and workstations designed for commercial hygiene standards and modern residential aesthetics. Our non-porous surfaces ensure food safety and longevity.",
         icon: LayoutGrid,
+        image: "/images/kitchen_interior_1767249084699.png",
         heroImage: "/images/hero-kitchen.jpg",
         features: [
             {
@@ -336,6 +341,7 @@ export const categoryData: Category[] = [
         shortDescription: "Engineered specifications for high-performance industrial applications.",
         fullDescription: "Our Industrial division provides heavy-duty fabrication solutions, from structural components to custom OEM manufacturing. Utilizing advanced laser cutting, CNC bending, and robotic welding, we deliver precision parts and assemblies that drive industrial operations.",
         icon: Factory,
+        image: "/images/industrial_fabrication_1767249111072.png",
         heroImage: "/images/hero-industrial.jpg",
         features: [
             {
