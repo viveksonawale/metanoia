@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { ContactSideTab } from "@/components/ContactSideTab";
+import { FloatingActions } from "@/components/FloatingActions";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +29,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen font-sans antialiased", inter.variable)}>
         {children}
-        <ScrollToTop />
+        <ContactSideTab />
+        <FloatingActions />
       </body>
     </html>
   );

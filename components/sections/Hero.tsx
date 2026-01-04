@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {
@@ -59,20 +59,23 @@ export function Hero() {
                         </Link>
                         <Link href="/contact-sales" className="w-full sm:w-auto">
                             <Button variant="outline" size="lg" className="w-full text-base md:text-lg h-12 md:h-14 bg-background border-border/60 hover:bg-secondary text-foreground hover:text-foreground rounded-sm">
-                                Consult Our Team
+                                Get a Quote
                             </Button>
                         </Link>
                     </div>
 
-                    <div className="flex flex-col xs:flex-row xs:items-center gap-3 xs:gap-6 md:gap-8 text-sm md:text-lg text-muted-foreground font-medium">
-                        <div className="flex items-center gap-2">
-                            <Check className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0" /> <span className="text-foreground">ISO 9001:2015</span>
+                    <div className="flex flex-row flex-wrap items-center justify-start gap-6 md:gap-12 text-sm md:text-base text-muted-foreground font-medium mt-auto pt-4">
+                        <div className="flex items-center gap-2.5">
+                            <ShieldCheck className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0 stroke-[1.5]" />
+                            <span className="text-foreground/90 whitespace-nowrap">ISO 9001:2015</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Check className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0" /> <span className="text-foreground">UL Fire Rated</span>
+                        <div className="flex items-center gap-2.5">
+                            <ShieldCheck className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0 stroke-[1.5]" />
+                            <span className="text-foreground/90 whitespace-nowrap">UL Fire Rated</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Check className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0" /> <span className="text-foreground">High-Cycle Tested</span>
+                        <div className="flex items-center gap-2.5">
+                            <ShieldCheck className="text-accent h-4 w-4 md:h-5 md:w-5 flex-shrink-0 stroke-[1.5]" />
+                            <span className="text-foreground/90 whitespace-nowrap">High-Cycle Tested</span>
                         </div>
                     </div>
                 </motion.div>
@@ -84,7 +87,10 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="relative h-[280px] xs:h-[350px] sm:h-[500px] md:h-[600px] w-full mt-8 md:mt-0"
                 >
-                    <div className="relative h-full w-full overflow-hidden">
+                    {/* Soft Grounding Glow/Shadow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-primary/5 blur-[80px] rounded-full z-0" />
+
+                    <div className="relative h-full w-full overflow-hidden z-10 drop-shadow-xl">
                         <Image
                             src="/images/hero_showcase.png"
                             alt="Premium Windows and Doors Collection"

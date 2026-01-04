@@ -16,9 +16,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <TrustBar />
-      <ProjectShowcase />
-
-      {/* Product Categories Section - Matches Reference Image */}
       <section id="products" className="py-20 bg-background">
         <Container className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
@@ -47,6 +44,8 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <ProjectShowcase />
 
       <Testimonials />
 

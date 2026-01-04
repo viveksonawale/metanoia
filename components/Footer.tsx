@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Facebook, Twitter, Linkedin, Instagram, MapPin, Mail } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
 import { categoryData } from "@/lib/categoryData";
 
 export function Footer() {
     return (
-        <footer className="bg-muted/30 text-foreground border-t border-border pt-20 pb-10">
+        <footer className="bg-muted/30 text-foreground border-t border-border pt-12 pb-6">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                     {/* Brand Column */}
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center gap-3">
@@ -27,18 +27,15 @@ export function Footer() {
                             Premium architectural and industrial solutions for enterprise construction projects. Engineered for durability, designed for performance.
                         </p>
                         <div className="flex items-center gap-4">
-                            <Link href="#" className="w-10 h-10 rounded-sm border border-input flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-all bg-background">
-                                <Facebook className="w-4 h-4" />
-                            </Link>
-                            <Link href="#" className="w-10 h-10 rounded-md border border-input flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all bg-background">
-                                <Twitter className="w-4 h-4" />
-                            </Link>
-                            <Link href="#" className="w-10 h-10 rounded-md border border-input flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all bg-background">
+                            <a href="https://www.linkedin.com/company/metanoiaglobal/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-sm border border-input flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-all bg-background">
                                 <Linkedin className="w-4 h-4" />
-                            </Link>
-                            <Link href="#" className="w-10 h-10 rounded-md border border-input flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all bg-background">
-                                <Instagram className="w-4 h-4" />
-                            </Link>
+                            </a>
+                            <a href="#" className="w-10 h-10 rounded-sm border border-input flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-all bg-background">
+                                <Facebook className="w-4 h-4" />
+                            </a>
+                            <a href="#" className="w-10 h-10 rounded-sm border border-input flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-all bg-background">
+                                <MessageCircle className="w-4 h-4" />
+                            </a>
                         </div>
                     </div>
 
@@ -86,23 +83,36 @@ export function Footer() {
                             </button>
                         </div>
                         <div className="space-y-4 pt-4">
-                            <div className="flex items-start gap-3 text-muted-foreground">
-                                <MapPin className="w-5 h-5 text-primary shrink-0" />
-                                <span className="text-sm">
-                                    1200 Industrial Parkway, Suite 500<br />
-                                    Houston, TX 77002, USA
-                                </span>
+                            <div className="flex items-start gap-3 text-muted-foreground group">
+                                <MapPin className="w-5 h-5 text-primary shrink-0 mt-1" />
+                                <a
+                                    href="https://www.google.com/maps/search/?api=1&query=301+Bldg+No.+5+HastinapuR+Lok+Nagri+Complex+Ambernath+Thane+Kalyan"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm group-hover:text-foreground transition-colors"
+                                >
+                                    301 Bldg No. 5, HastinapuR, Lok Nagri Complex,
+                                    Ambernath, Thane, Kalyan,
+                                    Maharashtra, India, 421501
+                                </a>
                             </div>
-                            <div className="flex items-center gap-3 text-muted-foreground">
+                            <div className="flex items-center gap-3 text-muted-foreground group">
                                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                                <span className="text-sm">engineering@metanoia.com</span>
+                                <a href="mailto:support@metanoiaglobal.com" className="text-sm group-hover:text-foreground transition-colors">support@metanoiaglobal.com</a>
+                            </div>
+                            <div className="flex items-start gap-3 text-muted-foreground group">
+                                <Phone className="w-5 h-5 text-primary shrink-0 mt-1" />
+                                <div className="flex flex-col text-sm">
+                                    <a href="tel:+918169025019" className="hover:text-foreground transition-colors">+91 816 902 5019</a>
+                                    <a href="tel:+917972891950" className="hover:text-foreground transition-colors">+91 79 7289 1950</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="border-t border-border pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div className="text-muted-foreground text-xs">
                         &copy; {new Date().getFullYear()} Metanoia Industries. All rights reserved.
                     </div>

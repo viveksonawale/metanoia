@@ -13,15 +13,75 @@ export function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [submitError, setSubmitError] = useState<string | null>(null);
+    const [phoneNumber, setPhoneNumber] = useState("");
+
+    const validateForm = (formData: FormData) => {
+        const newErrors: Record<string, string> = {};
+        const email = formData.get("email") as string;
+        const phone = formData.get("phone") as string;
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            newErrors.email = "Please enter a valid email address.";
+        }
+
+        // Phone validation (allows +, spaces, dashes, parentheses, 10+ digits)
+        const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im; // Basic international-friendly regex
+        // Or simpler one: at least 10 digits
+        const simplerPhoneRegex = /^\+?[\d\s-]{10,}$/;
+
+        if (!phone || !simplerPhoneRegex.test(phone)) {
+            newErrors.phone = "Please enter a valid phone number (min 10 digits).";
+        }
+
+        return newErrors;
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const validationErrors = validateForm(formData);
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        setErrors({});
+        setSubmitError(null);
         setIsSubmitting(true);
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        try {
+            const payload = {
+                fullName: formData.get("fullName"),
+                companyName: formData.get("companyName"),
+                phone: formData.get("phone"),
+                email: formData.get("email"),
+                message: formData.get("message") || null,
+            };
 
-        setIsSubmitting(false);
-        setIsSuccess(true);
+            const response = await fetch("https://metanoia-backend-o7gb.onrender.com/api/sales-enquiry", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit enquiry.");
+            }
+
+            setIsSubmitting(false);
+            setIsSuccess(true);
+        } catch (error) {
+            console.error(error);
+            setSubmitError("Something went wrong. Please try again later.");
+            setIsSubmitting(false);
+        }
     };
 
     if (isSuccess) {
@@ -55,60 +115,62 @@ export function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
-                    <Label htmlFor="firstName">Full Name <span className="text-accent">*</span></Label>
-                    <Input id="firstName" required placeholder="John Doe" className="rounded-sm" />
+                    <Label htmlFor="fullName">Full Name <span className="text-accent">*</span></Label>
+                    <Input id="fullName" name="fullName" required placeholder="Enter your full name" className="rounded-sm" />
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="company">Company Name <span className="text-accent">*</span></Label>
-                    <Input id="company" required placeholder="Acme Industries" className="rounded-sm" />
+                    <Label htmlFor="companyName">Company Name <span className="text-accent">*</span></Label>
+                    <Input id="companyName" name="companyName" required placeholder="Enter company name" className="rounded-sm" />
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
-                    <Label htmlFor="email">Work Email <span className="text-accent">*</span></Label>
-                    <Input id="email" type="email" required placeholder="john@company.com" className="rounded-sm" />
+                    <Label htmlFor="email">Email Address <span className="text-accent">*</span></Label>
+                    <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="Enter your work email"
+                        className={`rounded-sm ${errors.email ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                        onChange={() => {
+                            if (errors.email) setErrors(prev => ({ ...prev, email: "" }));
+                        }}
+                    />
+                    {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number <span className="text-accent">*</span></Label>
-                    <Input id="phone" type="tel" required placeholder="+1 (555) 000-0000" className="rounded-sm" />
+                    <Label htmlFor="phone">Number <span className="text-accent">*</span></Label>
+                    <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        required
+                        placeholder="Enter phone number"
+                        value={phoneNumber}
+                        className={`rounded-sm ${errors.phone ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            // Remove any character that is not a digit, space, plus, dash, or parenthesis
+                            // This effectively prevents entering alphabets
+                            const sanitized = value.replace(/[^\d+\-\s()]/g, "");
+                            setPhoneNumber(sanitized);
+
+                            if (errors.phone) setErrors(prev => ({ ...prev, phone: "" }));
+                        }}
+                    />
+                    {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <div className="space-y-2">
-                    <Label htmlFor="category">Product Category <span className="text-accent">*</span></Label>
-                    <Select id="category" required defaultValue="" className="rounded-sm">
-                        <option value="" disabled>Select a Category</option>
-                        <option value="doors">Industrial Doors</option>
-                        <option value="windows">High-Performance Windows</option>
-                        <option value="facade">Façade Systems</option>
-                        <option value="kitchen">Commercial Kitchens</option>
-                        <option value="custom">Custom Fabrication</option>
-                    </Select>
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="projectType">Project Type <span className="text-accent">*</span></Label>
-                    <Select id="projectType" required defaultValue="" className="rounded-sm">
-                        <option value="" disabled>Select Project Type</option>
-                        <option value="commercial">Commercial Building</option>
-                        <option value="industrial">Industrial Facility</option>
-                        <option value="residential">High-End Residential</option>
-                        <option value="infrastructure">Public Infrastructure</option>
-                        <option value="other">Other</option>
-                    </Select>
-                </div>
-            </div>
+
 
             <div className="space-y-2">
-                <Label htmlFor="scope">Estimated Quantity / Scope <span className="text-accent">*</span></Label>
-                <Input id="scope" required placeholder="e.g. 500 sq ft, 20 units, entire facility..." className="rounded-sm" />
-            </div>
-
-            <div className="space-y-2">
-                <Label htmlFor="message">Message / Requirements</Label>
+                <Label htmlFor="message">Message</Label>
                 <Textarea
                     id="message"
+                    name="message"
                     placeholder="Describe your project specifications, timeline, and any specific requirements..."
                     className="min-h-[150px] rounded-sm"
                 />
@@ -130,6 +192,9 @@ export function ContactForm() {
                     "Submit Sales Enquiry"
                 )}
             </Button>
+            {submitError && (
+                <p className="text-sm text-red-500 text-center mt-2">{submitError}</p>
+            )}
 
             <p className="text-xs text-muted-foreground text-center mt-4">
                 By submitting this form, you agree to our privacy policy. Your information will be routed directly to our sales engineering team.
